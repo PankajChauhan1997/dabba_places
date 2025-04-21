@@ -7,7 +7,6 @@ class pickeImageInput extends StatefulWidget {
 
   @override
   State<pickeImageInput> createState() => _pickeImageInputState();
-
 }
 
 class _pickeImageInputState extends State<pickeImageInput> {
