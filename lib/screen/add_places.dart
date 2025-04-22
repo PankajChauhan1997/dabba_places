@@ -1,11 +1,16 @@
+import 'dart:io';
+
+import 'package:dabba_favorite_place/model/placeModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dabba_favorite_place/providers/user_places.dart';
 
 import '../widgets/image_input.dart';
+import '../widgets/location_input.dart';
 
 class FavoritePalce extends ConsumerStatefulWidget {
   const FavoritePalce({Key? key,}) : super(key: key);
+
 
   @override
   ConsumerState<FavoritePalce> createState() => _FavoritePalceState();
@@ -13,13 +18,15 @@ class FavoritePalce extends ConsumerStatefulWidget {
 
 class _FavoritePalceState extends ConsumerState<FavoritePalce> {
   final _titleController=TextEditingController();
+  File? selectedImage;
+  PlaceLocation? selectedLocation;
 
   void _saveplace(){
     final enteredTitle=_titleController.text;
-    if(enteredTitle.isEmpty){
+    if(enteredTitle.isEmpty||selectedImage==null||selectedLocation==null){
 return;
     }
-    ref.read(userPlacesProvider.notifier).addPlace(enteredTitle);
+    ref.read(userPlacesProvider.notifier).addPlace(enteredTitle,selectedImage!,selectedLocation!);
     Navigator.of(context).pop();
   }
   @override
@@ -45,7 +52,11 @@ return;
                  style:TextStyle(color:Theme.of(context).colorScheme.onSurface)
               ),
                   SizedBox(height:20),
-                  pickeImageInput(),
+                  pickeImageInput(onPickImage: (image) =>
+                  selectedImage=image
+                  ),
+                  SizedBox(height:20),
+                  LocationInput(onLocationSelection: (location)=>selectedLocation=location,),
                   SizedBox(height:20),
                   ElevatedButton.icon(onPressed:_saveplace,
                     label: Text("Add Place"),
