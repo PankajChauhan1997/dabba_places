@@ -33,7 +33,8 @@ class _MapScreenState extends State<MapScreen>{
         if(widget.isSelecting)
           IconButton(onPressed: (){
             Navigator.of(context).pop(pickedLocation);
-          }, icon: Icon(Icons.save))
+          },
+              icon: Icon(Icons.save))
     ]),
       body:GoogleMap(
         onTap: !widget.isSelecting?null:(position){
@@ -43,12 +44,12 @@ class _MapScreenState extends State<MapScreen>{
         },
         initialCameraPosition: CameraPosition(
             target: LatLng(
-            widget.location.lattitude,
-            widget.location.longitude ),zoom:16,),
+            widget.location.lattitude??0.0,
+            widget.location.longitude??0.0 ),zoom:16,),
           markers:(pickedLocation==null && widget.isSelecting)?{}:{
           Marker(markerId: MarkerId('M1'),
-              position: pickedLocation??LatLng(widget.location.lattitude,
-              widget.location.longitude))
+              position: pickedLocation??LatLng(widget.location.lattitude??0.0,
+              widget.location.longitude??0.0))
           }
 
       ) ,);

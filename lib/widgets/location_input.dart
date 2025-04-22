@@ -8,10 +8,10 @@ import 'package:location/location.dart';
 import 'package:http/http.dart'as http;
 
 class LocationInput extends StatefulWidget{
-  LocationInput({super.key,required this.onLocationSelection});
+  LocationInput({super.key,this.onLocationSelection});
 
 
-  final void Function(PlaceLocation location)onLocationSelection;
+  final void Function(PlaceLocation location) ? onLocationSelection;
   @override
   State<LocationInput>createState(){
     return _LocationInputState();
@@ -64,7 +64,7 @@ class _LocationInputState extends State<LocationInput>{
       return;
     }
     savePlace(lat,lon);
-    widget.onLocationSelection(pickedLocation!);
+    widget.onLocationSelection!(pickedLocation!);
   }
 Future<void> savePlace(double lat,double long)async{
   final url=Uri.parse(
@@ -86,7 +86,7 @@ Future<void> savePlace(double lat,double long)async{
     if(pickedLocation==null){
       return;
     }
-    savePlace(pickedLocation!.lattitude, pickedLocation!.longitude);
+    savePlace(pickedLocation?.lattitude??0.0, pickedLocation?.longitude??0.0);
   }
   @override
   Widget build(BuildContext context) {

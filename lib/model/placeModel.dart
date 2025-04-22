@@ -6,14 +6,15 @@ final uuid=Uuid();
 
 class PlaceLocation{
   const PlaceLocation({
-    required this.lattitude,
-    required this.longitude,
-    required this.address
+     this.lattitude,
+     this.longitude,
+     this.address,
+
 });
 
-  final double lattitude;
-  final double longitude;
-  final String address;
+  final double? lattitude;
+  final double? longitude;
+  final String? address;
 }
 
 
@@ -22,9 +23,8 @@ class Place{
     required this.title,
     required this.images,
     required this.location,
-
-
-  }):id = uuid.v4();
+    String ? id
+  }):id = id??uuid.v4();
   final String id;
   final String title;
   final File images;

@@ -23,10 +23,12 @@ class _FavoritePalceState extends ConsumerState<FavoritePalce> {
 
   void _saveplace(){
     final enteredTitle=_titleController.text;
-    if(enteredTitle.isEmpty||selectedImage==null||selectedLocation==null){
+    if(enteredTitle.isEmpty||selectedImage==null){
 return;
     }
-    ref.read(userPlacesProvider.notifier).addPlace(enteredTitle,selectedImage!,selectedLocation!);
+    // ref.read(userPlacesProvider.notifier).addPlace(enteredTitle,selectedImage!,selectedLocation!);
+    ref.read(userPlacesProvider.notifier).addPlace(enteredTitle,selectedImage!,
+        selectedLocation??PlaceLocation());
     Navigator.of(context).pop();
   }
   @override

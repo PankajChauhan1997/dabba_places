@@ -40,7 +40,7 @@ InkWell(onTap:(){
                 colors: [Colors.transparent,Colors.black54],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter)),
-            child: Text(place.location.address,textAlign: TextAlign.center,
+            child: Text(place.location.address??"Pankaj address",textAlign: TextAlign.center,
             style:Theme.of(context).textTheme.titleLarge!.copyWith(
               color:Theme.of(context).colorScheme.onSurface)),),
         ],) )
